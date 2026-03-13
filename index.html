@@ -12,10 +12,11 @@
         img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 5px; }
         
         .hero { text-align: center; background: #fff; }
-        .hero h1 { background-color: #2196F3; color: white; margin: 0; padding: 15px 10px; font-size: 24px; text-transform: uppercase; font-weight: 900;}
-        .hero-subtitle { background: #1976D2; color: white; padding: 10px; font-size: 16px; margin: 0; font-weight: bold;}
+        /* ЗМІНЕНО КОЛІР НА ПОМАРАНЧЕВИЙ */
+        .hero h1 { background-color: #FF9800; color: white; margin: 0; padding: 15px 10px; font-size: 24px; text-transform: uppercase; font-weight: 900;}
+        .hero-subtitle { background: #E65100; color: white; padding: 10px; font-size: 16px; margin: 0; font-weight: bold;}
         
-        .price-block { text-align: center; padding: 20px; background: #e3f2fd; border-bottom: 2px dashed #2196F3; }
+        .price-block { text-align: center; padding: 20px; background: #fff3e0; border-bottom: 2px dashed #FF9800; }
         .old-price { font-size: 20px; color: #888; text-decoration: line-through; }
         .new-price { font-size: 30px; font-weight: bold; color: #d32f2f; margin: 10px 0; }
         .promo-1plus1 { font-size: 20px; font-weight: 900; color: #d32f2f; margin: 15px 0 5px 0; text-transform: uppercase; background: #ffebee; padding: 10px; border-radius: 8px; border: 2px solid #f44336; animation: pulse 2s infinite;}
@@ -28,7 +29,7 @@
         .time-label { display: block; font-size: 12px; font-weight: normal; margin-top: 5px; }
 
         .content { padding: 20px; }
-        .section-title { text-align: center; color: #1976D2; border-bottom: 2px solid #1976D2; padding-bottom: 10px; margin-top: 30px; margin-bottom: 20px; font-weight: 900; text-transform: uppercase;}
+        .section-title { text-align: center; color: #E65100; border-bottom: 2px solid #E65100; padding-bottom: 10px; margin-top: 30px; margin-bottom: 20px; font-weight: 900; text-transform: uppercase;}
         
         .list-block p { font-size: 16px; line-height: 1.5; text-align: justify;}
         .list-block ul { list-style: none; padding: 0; }
@@ -66,9 +67,9 @@
         .reviews { margin-top: 30px; }
         .reviews-carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding-bottom: 15px; scrollbar-width: none; -ms-overflow-style: none; }
         .reviews-carousel::-webkit-scrollbar { display: none; }
-        .review-card { min-width: 85%; scroll-snap-align: center; background: #f9f9f9; padding: 20px 15px; border-radius: 8px; border: 1px solid #e0e0e0; border-top: 4px solid #2196F3; box-sizing: border-box; text-align: center; }
+        .review-card { min-width: 85%; scroll-snap-align: center; background: #f9f9f9; padding: 20px 15px; border-radius: 8px; border: 1px solid #e0e0e0; border-top: 4px solid #FF9800; box-sizing: border-box; text-align: center; }
         .review-header { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 15px; }
-        .review-img-box { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 3px solid #2196F3; flex-shrink: 0; margin: 0 auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .review-img-box { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 3px solid #FF9800; flex-shrink: 0; margin: 0 auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .review-img-box img { width: 100%; height: 100%; object-fit: cover; }
         .review-name { font-weight: bold; font-size: 18px; color: #222; }
         .stars { color: #ff9800; font-size: 18px; margin-top: -5px; }
@@ -89,7 +90,7 @@
         .legal-footer { text-align: center; margin-top: 30px; padding: 20px; background: #eceff1; font-size: 12px; color: #546e7a; border-top: 1px solid #cfd8dc;}
         .legal-footer p { margin: 5px 0; }
         .contact-info { margin: 15px 0; padding: 10px; background: #e0e0e0; border-radius: 5px; font-size: 14px; font-weight: bold; color: #333;}
-        .legal-footer a { color: #1976D2; text-decoration: none; font-weight: bold; display: block; margin: 8px 0; font-size: 13px;}
+        .legal-footer a { color: #E65100; text-decoration: none; font-weight: bold; display: block; margin: 8px 0; font-size: 13px;}
         .legal-footer a:hover { text-decoration: underline; }
 
         @keyframes pulse {
@@ -292,27 +293,4 @@
             const phone = document.getElementById('phone').value;
 
             // Изменен текст для Телеграма под новый товар
-            const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner (Піна)\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
-
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
-
-            fetch(url)
-                .then(response => {
-                    if (response.ok) {
-                        form.style.display = 'none';
-                        successMessage.style.display = 'block';
-                    } else {
-                        alert('Помилка відправки. Перевірте з\'єднання.');
-                        submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
-                        submitBtn.disabled = false;
-                    }
-                })
-                .catch(error => {
-                    alert('Помилка з\'єднання. Спробуйте пізніше.');
-                    submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
-                    submitBtn.disabled = false;
-                });
-        });
-    </script>
-</body>
-</html>
+            const text
