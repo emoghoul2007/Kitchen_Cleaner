@@ -12,7 +12,6 @@
         img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 5px; }
         
         .hero { text-align: center; background: #fff; }
-        /* ЗМІНЕНО КОЛІР НА ПОМАРАНЧЕВИЙ */
         .hero h1 { background-color: #FF9800; color: white; margin: 0; padding: 15px 10px; font-size: 24px; text-transform: uppercase; font-weight: 900;}
         .hero-subtitle { background: #E65100; color: white; padding: 10px; font-size: 16px; margin: 0; font-weight: bold;}
         
@@ -39,7 +38,7 @@
         .image-banner { margin-top: 5px; text-align: center; }
         .image-banner img { border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
 
-        /* --- НОВЫЙ ДИЗАЙН КАРТОЧЕК С РАМКОЙ --- */
+        /* --- ДИЗАЙН КАРТОЧЕК С РАМКОЙ --- */
         .info-card {
             background: #ffffff;
             border: 1px solid #e0e0e0;
@@ -207,7 +206,7 @@
             <div class="order-form" id="order">
                 <h2>Оформлення замовлення</h2>
                 
-                <form id="tgForm">
+                <form id="tgForm" onsubmit="sendToTelegram(event)">
                     <div class="form-group">
                         <label for="quantity">Оберіть варіант замовлення:</label>
                         <select id="quantity" name="quantity" required>
@@ -247,7 +246,9 @@
                 <a href="https://rustof.bravix.uno/conditions.html" target="_blank">Умови гарантії та повернення</a>
                 <a href="https://rustof.bravix.uno/usersagitment.html" target="_blank">Угода користувача</a>
                 <a href="https://rustof.bravix.uno/oferta.html" target="_blank">Договір оферти</a>
-                <a href="https://rustof.bravix.uno/privacy.html" target="_blank">Політика конфіденційності</a>
+                
+                <a href="https://rustof.bravix.uno/politics.html" target="_blank">Політика конфіденційності</a>
+                
                 <p style="margin-top: 15px; color: #90a4ae;">© 2026 Всі права захищені.</p>
             </div>
 
@@ -275,15 +276,13 @@
         startTimer();
 
         // --- ВІДПРАВКА В TELEGRAM ---
-        const BOT_TOKEN = '8484859144:AAHgl6ejWRDbhJ3jeeP5dLaC0WlH35pPwNA'; 
-        const CHAT_ID = '-1003794087121'; 
+        function sendToTelegram(event) {
+            // Ця команда жорстко блокує перезавантаження сторінки
+            event.preventDefault(); 
 
-        const form = document.getElementById('tgForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); 
+            const form = document.getElementById('tgForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
 
             submitBtn.textContent = 'ВІДПРАВКА...';
             submitBtn.disabled = true;
@@ -292,5 +291,31 @@
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
 
-            // Изменен текст для Телеграма под новый товар
-            const text
+            // Твої дані бота Телеграм
+            const BOT_TOKEN = '8484859144:AAHgl6ejWRDbhJ3jeeP5dLaC0WlH35pPwNA'; 
+            const CHAT_ID = '-1003794087121'; 
+
+            const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner (Піна)\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
+
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        successMessage.style.display = 'block';
+                    } else {
+                        alert('Помилка відправки. Перевірте з\'єднання.');
+                        submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
+                        submitBtn.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    alert('Помилка з\'єднання. Спробуйте пізніше.');
+                    submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
+                    submitBtn.disabled = false;
+                });
+        }
+    </script>
+</body>
+</html>
