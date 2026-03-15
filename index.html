@@ -300,19 +300,19 @@
     const priceValue = parseInt(qty.replace(/\D/g, "")) || 299;
 
     // 2. ОТПРАВКА В TIKTOK (Этот блок решит вашу ошибку)
-    ttq.track('PlaceAnOrder', {
-        contents: [
-            {
-                content_id: 'kitchen_cleaner_01',
-                content_name: 'Kitchen Cleaner',
-                quantity: 1,
-                price: priceValue
-            }
-        ],
-        content_type: 'product',
-        value: priceValue,
-        currency: 'UAH'
-    });
+ ttq.track('PlaceAnOrder', {
+    contents: [
+        {
+            content_id: 'kitchen_cleaner_01', // ID товара
+            content_name: 'Kitchen Cleaner',
+            quantity: 1,
+            price: 299
+        }
+    ],
+    content_type: 'product', // ОБЯЗАТЕЛЬНО добавьте эту строку
+    value: 299,
+    currency: 'UAH'
+});
 
     // 3. ОТПРАВКА В TELEGRAM (Ваш существующий код)
     const submitBtn = document.getElementById('submitBtn');
@@ -322,7 +322,7 @@
     submitBtn.textContent = 'ВІДПРАВКА...';
     submitBtn.disabled = true;
 
-    const BOT_TOKEN = '8484859144:AAHgl6ejWRDbhJ3jeeP5dLaC0W1H35pPwNA';
+    const BOT_TOKEN = '8484859144:AAHgl6ejWRDbhJ3jeeP5dLaC0WlH35pPwNA';
     const CHAT_ID = '-1003794087121';
     
     const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
