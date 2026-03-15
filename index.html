@@ -287,46 +287,59 @@
         startTimer();
 
         // --- ВІДПРАВКА В TELEGRAM ---
-        function sendToTelegram(event) {
-            // Ця команда жорстко блокує перезавантаження сторінки
-            event.preventDefault(); 
+     function sendToTelegram(event) {
+    event.preventDefault();
 
-            const form = document.getElementById('tgForm');
-            const submitBtn = document.getElementById('submitBtn');
-            const successMessage = document.getElementById('successMessage');
+    // 1. ПОЛУЧАЕМ ДАННЫЕ ИЗ ФОРМЫ
+    const qty = document.getElementById('quantity').value; // Вариант заказа (цена/кол-во)
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
 
-            submitBtn.textContent = 'ВІДПРАВКА...';
-            submitBtn.disabled = true;
+    // Определяем цену для TikTok исходя из выбранного варианта
+    // Если в 'quantity' у вас текст вроде "598 грн", вырезаем число
+    const priceValue = parseInt(qty.replace(/\D/g, "")) || 299;
 
-            const qty = document.getElementById('quantity').value;
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
+    // 2. ОТПРАВКА В TIKTOK (Этот блок решит вашу ошибку)
+    ttq.track('PlaceAnOrder', {
+        contents: [
+            {
+                content_id: 'kitchen_cleaner_01',
+                content_name: 'Kitchen Cleaner',
+                quantity: 1,
+                price: priceValue
+            }
+        ],
+        content_type: 'product',
+        value: priceValue,
+        currency: 'UAH'
+    });
 
-            // Твої дані бота Телеграм
-            const BOT_TOKEN = '8484859144:AAHgl6ejWRDbhJ3jeeP5dLaC0WlH35pPwNA'; 
-            const CHAT_ID = '-1003794087121'; 
+    // 3. ОТПРАВКА В TELEGRAM (Ваш существующий код)
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+    const form = document.getElementById('tgForm');
 
-            const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner (Піна)\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
+    submitBtn.textContent = 'ВІДПРАВКА...';
+    submitBtn.disabled = true;
 
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
+    const BOT_TOKEN = '8484859144:AAHgl6ejWRDbhJ3jeeP5dLaC0W1H35pPwNA';
+    const CHAT_ID = '-1003794087121';
+    
+    const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
 
-            fetch(url)
-                .then(response => {
-                    if (response.ok) {
-                        form.style.display = 'none';
-                        successMessage.style.display = 'block';
-                    } else {
-                        alert('Помилка відправки. Перевірте з\'єднання.');
-                        submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
-                        submitBtn.disabled = false;
-                    }
-                })
-                .catch(error => {
-                    alert('Помилка з\'єднання. Спробуйте пізніше.');
-                    submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
-                    submitBtn.disabled = false;
-                });
-        }
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+            } else {
+                alert('Помилка відправки. Перевірте з\'єднання.');
+                submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
+                submitBtn.disabled = false;
+            }
+        });
+}
     </script>
 </body>
 </html>
