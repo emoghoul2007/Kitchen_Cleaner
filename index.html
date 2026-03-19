@@ -364,7 +364,7 @@ function sendToTelegram(event) {
         .then(response => {
             if (response.ok) {
                 // --- ВОТ ЭТА СТРОЧКА ТЕПЕРЬ ТУТ ---
-                fbq('track', 'Lead'); 
+                fbq('track', 'Purchase'); 
                 // ---------------------------------
                 
                 form.style.display = 'none';
