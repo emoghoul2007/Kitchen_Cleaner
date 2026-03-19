@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kitchen Cleaner - Універсальна активна піна</title>
-<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -20,8 +19,7 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
-    <style>
+<style>
         /* весь твой дизайн и стили остаются здесь без изменений */
         /* --- ДИЗАЙН И СТИЛИ --- */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
@@ -118,6 +116,15 @@ src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
 
         #successMessage { display: none; text-align: center; padding: 20px; background: #d4edda; color: #155724; border-radius: 5px; margin-top: 20px; font-weight: bold;}
         .swipe-hint { text-align: center; font-size: 14px; color: #666; margin-bottom: 10px; font-style: italic; font-weight: bold;}
+
+        /* --- СТИЛИ ДЛЯ ТАБЛИЦЫ --- */
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+        .comparison-table th { padding: 10px; background: #f2f2f2; color: #444; border: 1px solid #ddd; }
+        .comparison-table td { padding: 12px 8px; border: 1px solid #ddd; text-align: center; vertical-align: middle; }
+        .comparison-table td:first-child { text-align: left; font-weight: bold; background: #fafafa; width: 35%; }
+        .highlight-cell { background: #fff3e0 !important; color: #e65100; font-weight: 900; width: 35%; }
+        .icon-bad { color: #d32f2f; font-weight: bold; font-size: 18px; }
+        .icon-good { color: #2e7d32; font-weight: bold; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -131,10 +138,10 @@ src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
         </div>
 
         <div class="price-block">
-            <div class="old-price">Звичайна ціна: 499 грн</div>
-            <div class="new-price">Ціна по акції: 349 грн</div>
+            <div class="old-price">Звичайна ціна: 699 грн</div>
+            <div class="new-price">Ціна по акції: 340 грн</div>
             
-            <div class="promo-1plus1">🎁 СУПЕР АКЦІЯ 1+1 = 3 🎁<br><span style="font-size: 16px; color: #333;">Ціна в наборі (1+1=3): лише 299 грн за одиницю!</span></div>
+            <div class="promo-1plus1">🎁 СУПЕР АКЦІЯ 1+1 = 3 🎁</div>
             
             <div class="timer-box">
                 <div class="timer-title">⏳ До кінця акції залишилось:</div>
@@ -220,6 +227,46 @@ src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
                 <img src="predbait.jpg" alt="Увага Акція">
             </div>
 
+            <h2 class="section-title">Порівняння з аналогами</h2>
+            <div class="info-card" style="padding: 10px;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Характеристика</th>
+                            <th>Звичайні засоби</th>
+                            <th style="background: #FF9800; color: white;">Kitchen Cleaner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Об'єм балона</td>
+                            <td><span class="icon-bad">✘</span> 150-200 мл</td>
+                            <td class="highlight-cell"><span class="icon-good">✔</span> 260 мл</td>
+                        </tr>
+                        <tr>
+                            <td>Швидкість реакції</td>
+                            <td><span class="icon-bad">✘</span> 15-30 хв</td>
+                            <td class="highlight-cell"><span class="icon-good">✔</span> до 5 хв</td>
+                        </tr>
+                        <tr>
+                            <td>Видалення нагару</td>
+                            <td><span class="icon-bad">✘</span> Потребує тертя</td>
+                            <td class="highlight-cell"><span class="icon-good">✔</span> Розчиняє сам</td>
+                        </tr>
+                        <tr>
+                            <td>Захист поверхні</td>
+                            <td><span class="icon-bad">✘</span> Можливі подряпини</td>
+                            <td class="highlight-cell"><span class="icon-good">✔</span> Безпечна піна</td>
+                        </tr>
+                        <tr>
+                            <td>Економність</td>
+                            <td><span class="icon-bad">✘</span> Низька</td>
+                            <td class="highlight-cell"><span class="icon-good">✔</span> Висока</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="order-form" id="order">
                 <h2>Оформлення замовлення</h2>
                 
@@ -227,9 +274,9 @@ src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
                     <div class="form-group">
                         <label for="quantity">Оберіть варіант замовлення:</label>
                         <select id="quantity" name="quantity" required>
-                            <option value="1 шт - 349 грн">1 штука - 349 грн</option>
-                            <option value="Акція 1+1=3 - 598 грн" selected>🔥 АКЦІЯ 1+1=3 (Отримати 3 шт) - 598 грн</option>
-                            <option value="2 шт - 698 грн">2 штуки - 698 грн</option>
+                            <option value="1 шт - 340 грн">1 штука - 340 грн</option>
+                            <option value="Акція 1+1=3 - 680 грн" selected>🔥 АКЦІЯ 1+1=3 (Отримати 3 шт) - 680 грн</option>
+                            <option value="Акція 2+2=6 - 1360 грн">🔥 АКЦІЯ 2+2=6 (Отримати 6 шт) - 1360 грн</option>
                             <option value="Інша кількість">Інша кількість (вказати менеджеру)</option>
                         </select>
                     </div>
@@ -292,16 +339,14 @@ src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
         }
         startTimer();
 
-        // --- ВІДПРАВКА В TELEGRAM ---
-     function sendToTelegram(event) {
+function sendToTelegram(event) {
     event.preventDefault();
 
     // 1. ПОЛУЧАЕМ ДАННЫЕ ИЗ ФОРМЫ
-    const qty = document.getElementById('quantity').value; // Вариант заказа (цена/кол-во)
+    const qty = document.getElementById('quantity').value; 
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
 
-    // 3. ОТПРАВКА В TELEGRAM (Ваш существующий код)
     const submitBtn = document.getElementById('submitBtn');
     const successMessage = document.getElementById('successMessage');
     const form = document.getElementById('tgForm');
@@ -318,6 +363,10 @@ src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
     fetch(url)
         .then(response => {
             if (response.ok) {
+                // --- ВОТ ЭТА СТРОЧКА ТЕПЕРЬ ТУТ ---
+                fbq('track', 'Lead'); 
+                // ---------------------------------
+                
                 form.style.display = 'none';
                 successMessage.style.display = 'block';
             } else {
