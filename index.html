@@ -43,6 +43,70 @@ src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
         .time-block { background: #333; color: #fff; padding: 10px; border-radius: 5px; min-width: 50px; font-size: 20px; font-weight: bold; text-align: center; }
         .time-label { display: block; font-size: 12px; font-weight: normal; margin-top: 5px; }
 
+        /* --- НОВИЙ БЛОК КОМБО-ЦІН (Темний) --- */
+        .combo-offers {
+            background: #1a1a1a;
+            border-radius: 12px;
+            margin: 20px 15px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .combo-title {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 900;
+            font-size: 16px;
+            padding: 15px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #333;
+        }
+        .combo-row {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 15px;
+            border-bottom: 1px solid #333;
+            overflow: hidden;
+        }
+        .combo-row:last-child {
+            border-bottom: none;
+        }
+        .combo-text {
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2;
+        }
+        .combo-price {
+            font-size: 20px;
+        }
+        .discount-badge {
+            background: #ff3b30;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .ribbon {
+            position: absolute;
+            right: -28px;
+            top: 15px;
+            background: #ff6d00;
+            color: #fff;
+            padding: 4px 30px;
+            font-size: 12px;
+            font-weight: 900;
+            transform: rotate(45deg);
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
         .content { padding: 20px; }
         .section-title { text-align: center; color: #E65100; border-bottom: 2px solid #E65100; padding-bottom: 10px; margin-top: 30px; margin-bottom: 20px; font-weight: 900; text-transform: uppercase;}
         
@@ -152,6 +216,28 @@ src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
                     <div class="time-block">:<span class="time-label">&nbsp;</span></div>
                     <div class="time-block"><span id="seconds">30</span><span class="time-label">Секунд</span></div>
                 </div>
+            </div>
+        </div>
+
+        <div class="combo-offers">
+            <div class="combo-title">ЗАОЩАДЖУЙ ПРЯМО ЗАРАЗ!</div>
+            <div class="combo-row">
+                <div class="combo-text">
+                    <span>1+1=3</span>
+                    <span>=</span>
+                    <span class="combo-price">612 ₴</span>
+                    <span class="discount-badge">-10%</span>
+                </div>
+                <div class="ribbon">ХІТ</div>
+            </div>
+            <div class="combo-row">
+                <div class="combo-text">
+                    <span>2+2=6</span>
+                    <span>=</span>
+                    <span class="combo-price">1120 ₴</span>
+                    <span class="discount-badge">-20%</span>
+                </div>
+                <div class="ribbon">МЕГА</div>
             </div>
         </div>
 
@@ -275,8 +361,8 @@ src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
                         <label for="quantity">Оберіть варіант замовлення:</label>
                         <select id="quantity" name="quantity" required>
                             <option value="1 шт - 340 грн">1 штука - 340 грн</option>
-                            <option value="Акція 1+1=3 - 680 грн" selected>🔥 АКЦІЯ 1+1=3 (Отримати 3 шт) - 680 грн</option>
-                            <option value="Акція 2+2=6 - 1360 грн">🔥 АКЦІЯ 2+2=6 (Отримати 6 шт) - 1360 грн</option>
+                            <option value="Акція 1+1=3 - 612 грн" selected>🔥 ХІТ: 1+1=3 (Отримати 3 шт) - 612 грн</option>
+                            <option value="Акція 2+2=6 - 1120 грн">🔥 МЕГА: 2+2=6 (Отримати 6 шт) - 1120 грн</option>
                             <option value="Інша кількість">Інша кількість (вказати менеджеру)</option>
                         </select>
                     </div>
