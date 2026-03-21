@@ -502,6 +502,7 @@ function sendToTelegram(event) {
         .then(response => {
             if (response.ok) {
                 fbq('track', 'Purchase'); 
+                ttq.track('CompletePayment');
                 
                 form.style.display = 'none';
                 successMessage.style.display = 'block';
