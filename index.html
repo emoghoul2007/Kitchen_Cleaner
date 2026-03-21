@@ -19,8 +19,7 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=2405027109911372&ev=PageView&noscript=1"
 /></noscript>
-    <!-- TikTok Pixel Code Start -->
-<script>
+    <script>
 !function (w, d, t) {
   w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
 var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
@@ -31,7 +30,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   ttq.page();
 }(window, document, 'ttq');
 </script>
-<!-- TikTok Pixel Code End -->
 <style>
         /* Плавная прокрутка для якорей */
         html {
@@ -233,6 +231,17 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         .highlight-cell { background: #fff3e0 !important; color: #e65100; font-weight: 900; width: 35%; }
         .icon-bad { color: #d32f2f; font-weight: bold; font-size: 18px; }
         .icon-good { color: #2e7d32; font-weight: bold; font-size: 18px; }
+        
+        /* СТИЛЬ ДЛЯ ЗЕЛЕНОЙ РАМКИ (Объем 500 мл) */
+        .green-frame {
+            border: 2px solid #2e7d32;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            background: #e8f5e9;
+            color: #1b5e20;
+            font-size: 15px;
+        }
     </style>
     <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -251,7 +260,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
         <div class="price-block">
             <div class="old-price">Звичайна ціна: 699 грн</div>
-            <div class="new-price">Ціна по акції: 340 грн</div>
+            <div class="new-price">Ціна по акції: 299 грн</div>
             
             <div class="promo-1plus1">🎁 СУПЕР АКЦІЯ 1+1 = 3 🎁</div>
             
@@ -273,8 +282,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <div class="combo-text">
                     <span>1+1=3</span>
                     <span>=</span>
-                    <span class="combo-price">680 ₴</span>
-                    <span class="discount-badge-red">знижка 340 грн</span>
+                    <span class="combo-price">598 ₴</span>
+                    <span class="discount-badge-red">знижка 299 грн</span>
                 </div>
                 <div class="ribbon">ХІТ</div>
             </div>
@@ -282,8 +291,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <div class="combo-text">
                     <span>2+2=6</span>
                     <span>=</span>
-                    <span class="combo-price">1360 ₴</span>
-                    <span class="discount-badge-red">знижка 680 грн</span>
+                    <span class="combo-price">1196 ₴</span>
+                    <span class="discount-badge-red">знижка 598 грн</span>
                 </div>
                 <div class="ribbon">МЕГА</div>
             </div>
@@ -379,7 +388,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                         <tr>
                             <td>Об'єм балона</td>
                             <td><span class="icon-bad">✘</span> 150-200 мл</td>
-                            <td class="highlight-cell"><span class="icon-good">✔</span> 260 мл</td>
+                            <td class="highlight-cell"><span class="green-frame"><span class="icon-good" style="color:#1b5e20;">✔</span> 500 мл</span></td>
                         </tr>
                         <tr>
                             <td>Швидкість реакції</td>
@@ -412,9 +421,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     <div class="form-group">
                         <label for="quantity">Оберіть варіант замовлення:</label>
                         <select id="quantity" name="quantity" required>
-                            <option value="1 шт - 340 грн">1 штука - 340 грн</option>
-                            <option value="Акція 1+1=3 - 680 грн" selected>🔥 ХІТ: 1+1=3 (Отримати 3 шт) - 680 грн</option>
-                            <option value="Акція 2+2=6 - 1360 грн">🔥 МЕГА: 2+2=6 (Отримати 6 шт) - 1360 грн</option>
+                            <option value="1 шт - 299 грн">1 штука - 299 грн</option>
+                            <option value="Акція 1+1=3 - 598 грн" selected>🔥 ХІТ: 1+1=3 (Отримати 3 шт) - 598 грн</option>
+                            <option value="Акція 2+2=6 - 1196 грн">🔥 МЕГА: 2+2=6 (Отримати 6 шт) - 1196 грн</option>
                             <option value="Інша кількість">Інша кількість (вказати менеджеру)</option>
                         </select>
                     </div>
