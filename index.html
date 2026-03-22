@@ -37,15 +37,55 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         }
 
         /* --- ДИЗАЙН И СТИЛИ --- */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; padding-bottom: 20px;}
+        /* Змінено колір фону на більш теплий і довірливий */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f5f0eb; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.08); overflow: hidden; padding-bottom: 20px;}
         
         img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 5px; }
         
-        .hero { text-align: center; background: #fff; }
+        .hero { text-align: center; background: #fff; padding-bottom: 0px; }
         .hero h1 { background-color: #FF9800; color: white; margin: 0; padding: 15px 10px; font-size: 24px; text-transform: uppercase; font-weight: 900;}
         .hero-subtitle { background: #E65100; color: white; padding: 10px; font-size: 16px; margin: 0; font-weight: bold;}
         
+        /* Блок характеристик під головним фото */
+        .specs-box {
+            border: 2px solid #FF9800;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 10px 15px;
+            background: #fffdfa;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(255, 152, 0, 0.1);
+        }
+        .specs-box h3 {
+            text-align: center;
+            color: #d32f2f;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+        .specs-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .specs-box li {
+            padding: 4px 0;
+            font-size: 15px;
+            color: #333;
+        }
+        .specs-box li strong {
+            color: #000;
+        }
+        .specs-box li::before {
+            content: "✔";
+            color: #FF9800;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
         .price-block { text-align: center; padding: 20px; background: #fff3e0; border-bottom: 2px dashed #FF9800; }
         .old-price { font-size: 20px; color: #888; text-decoration: line-through; }
         .new-price { font-size: 30px; font-weight: bold; color: #d32f2f; margin: 10px 0; }
@@ -157,12 +197,12 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         .list-block li { padding: 12px 0; border-bottom: 1px solid #eee; position: relative; padding-left: 35px; font-size: 16px; font-weight: 500;}
         .list-block li::before { content: "🔥"; position: absolute; left: 0; top: 12px; }
 
-        .image-banner { margin-top: 5px; text-align: center; }
+        .image-banner { margin-top: 15px; margin-bottom: 15px; text-align: center; }
         .image-banner img { border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
 
         /* --- ДИЗАЙН КАРТОЧЕК С РАМКОЙ --- */
         .info-card {
-            background: #ffffff;
+            background: #f5f0eb;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             padding: 15px;
@@ -206,6 +246,19 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         
         .submit-btn { background-color: #d32f2f; color: white; border: none; padding: 18px; width: 100%; font-size: 22px; font-weight: 900; border-radius: 5px; cursor: pointer; transition: 0.3s; animation: pulse 2s infinite; text-transform: uppercase;}
         .submit-btn:hover { background-color: #b71c1c; }
+        
+        .stock-left-badge {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 900;
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px dashed #f44336;
+            text-transform: uppercase;
+            font-size: 15px;
+        }
 
         /* Футер с документами */
         .legal-footer { text-align: center; margin-top: 30px; padding: 20px; background: #eceff1; font-size: 12px; color: #546e7a; border-top: 1px solid #cfd8dc;}
@@ -252,7 +305,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
     <div class="container">
         
-        <div class="hero">
+          <div class="hero">
             <h1>Kitchen Cleaner</h1>
             <p class="hero-subtitle">Універсальна активна піна від жиру, бруду та іржі</p>
             <img src="main-product.jpg" alt="Kitchen Cleaner пінний очищувач">
@@ -325,15 +378,24 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <p class="info-card-text">Використовується для швидкого очищення кухонних поверхонь, духовок та витяжок. Активна піна глибоко проникає в структуру бруду, ефективно розщеплюючи навіть старий застиглий жир та нагар.</p>
                 <img src="pokazodin.jpg" alt="Унікальна формула засобу">
             </div>
+            <div class="image-banner">
+                <img src="gifdiesasib1.gif" alt="Демонстрація дії засобу 1">
+            </div>
 
             <div class="info-card">
                 <p class="info-card-text">Миттєво руйнує не тільки жирові нашарування, а й іржу, окислення та технічні забруднення. Засіб не маскує бруд, а повністю розчиняє його, повертаючи поверхням первісний вигляд без виснажливого тертя.</p>
                 <img src="pokazdva.jpg" alt="Де застосовувати">
             </div>
+            <div class="image-banner">
+                <img src="gifdiesasib2.gif" alt="Демонстрація дії засобу 2">
+            </div>
 
             <div class="info-card">
                 <p class="info-card-text">Ідеально підходить для використання на кухні, у ванній кімнаті, в гаражі або майстерні. Безпечний для хромованих, нікельованих та глянсових покриттів, залишає після себе захисний шар, що перешкоджає швидкому осіданню нового бруду.</p>
                 <img src="pokaztri.jpg" alt="Спосіб застосування у 3 кроки">
+            </div>
+            <div class="image-banner">
+                <img src="gifdiesasib3.gif" alt="Демонстрація дії засобу 3">
             </div>
 
             <div class="reviews">
@@ -370,11 +432,12 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 </div>
             </div>
 
+            <h2 class="section-title">Порівняння з аналогами</h2>
+            
             <div class="image-banner">
-                <img src="predbait.jpg" alt="Увага Акція">
+                <img src="realfoto.jpg" alt="Реальне фото товару">
             </div>
 
-            <h2 class="section-title">Порівняння з аналогами</h2>
             <div class="info-card" style="padding: 10px;">
                 <table class="comparison-table">
                     <thead>
@@ -429,13 +492,14 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     </div>
                     <div class="form-group">
                         <label for="name">Ваше ПІБ:</label>
-                        <input type="text" id="name" name="name" placeholder="Іванов Іван Іванович" required>
+                        <input type="text" id="name" name="name" placeholder="Введіть Ваше ім'я" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Номер телефону:</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+380990000000" required>
+                        <input type="tel" id="phone" name="phone" placeholder="Введіть Ваш номер телефону" required>
                     </div>
                     <button type="submit" class="submit-btn" id="submitBtn">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+                    <div class="stock-left-badge">🎁 залишилося 9 штук по акції 🎁</div>
                 </form>
 
                 <div id="successMessage">
