@@ -583,6 +583,38 @@ function sendToTelegram(event) {
     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzK8NIO5NDxsAAcl8izXiT0lCvTHdWb6OcV_IKM8aHG946HrpGCG_L9jA7SF9AC2SELiQ/exec';
 
     // Відправка в Telegram
+function sendToTelegram(event) {
+    event.preventDefault();
+
+    const qty = document.getElementById('quantity').value; 
+    // .trim() обрезает случайные пробелы, если клиент случайно нажал пробел
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+    const form = document.getElementById('tgForm');
+
+    // 🛑 ЖЕСТКАЯ БЛОКИРОВКА (ЗАЩИТА ОТ ТОЧЕК И БОТОВ) 🛑
+    // Если имя или телефон пустые — код останавливается здесь и НИЧЕГО не отправляет!
+    if (!name || !phone || name === "" || phone === "") {
+        alert('Пожалуйста, введите имя и телефон!');
+        return; // Выходим из функции, fetch даже не запустится
+    }
+
+    submitBtn.textContent = 'ВІДПРАВКА...';
+    submitBtn.disabled = true;
+
+    // Твои данные
+    const BOT_TOKEN = '8484859144:AAHgl6ejWRDbhJ3jeeP5dLaC0WlH35pPwNA';
+    const CHAT_ID = '-1003794087121';
+    const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
+    const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
+
+    // Твоя ссылка на Google Таблицу
+    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzK8NI05NDxsAAcl8izXiT0ICvTHdWb6OcV_IKM8aHG946HrpGCG_L9jA7SF9AC2SELiQ/exec';
+
+    // Відправка в Telegram
     fetch(tgUrl).then(response => {
         if (response.ok) {
             // Паралельна відправка в таблицю для звіту
@@ -600,6 +632,11 @@ function sendToTelegram(event) {
             submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
             submitBtn.disabled = false;
         }
+    }).catch(error => {
+        // Добавил защиту на случай, если у клиента пропадет интернет при нажатии
+        alert('Помилка з\'єднання. Перевірте інтернет.');
+        submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
+        submitBtn.disabled = false;
     });
 }
     </script>
