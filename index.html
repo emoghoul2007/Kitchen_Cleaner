@@ -578,7 +578,7 @@ function sendToTelegram(event) {
     const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
 
     // Ссылка на Google Таблицу
-    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbwyFYoChvWNpllznAKIj-B_1usR_eRc2PjjasJwbb28TRiOKpzLAh1ivYq5PQL5tC6XXg/exec';
+    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycby4Vs-IGAkVjfz9ih3wiSQ44qm7f4sOixOj-CQNAOC6ZTRZUpM-1VhLCxgrUaMgEwKLPw/exec';
 
     // Отправка
     fetch(tgUrl).then(response => {
