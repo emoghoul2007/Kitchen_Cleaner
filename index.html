@@ -556,13 +556,28 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         }
         startTimer();
 
-    // Відправка в Telegram
+// Відправка в Telegram
 function sendToTelegram(event) {
     event.preventDefault();
 
     const qty = document.getElementById('quantity').value; 
     const name = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
+
+    // --- 🛑 БЛОКИРОВКА СПАМА И ТОЧЕК ---
+    // Проверка имени: если короче 2 букв или состоит только из точек/цифр
+    if (name.length < 2 || /^[\.\d]+$/.test(name)) {
+        alert("❌ Будь ласка, введіть справжнє ім'я.");
+        return; // Блокируем отправку
+    }
+
+    // Проверка телефона: оставляем только цифры и считаем их
+    const phoneDigits = phone.replace(/\D/g, '');
+    if (phoneDigits.length < 9) {
+        alert("❌ Будь ласка, введіть коректний номер телефону.");
+        return; // Блокируем отправку
+    }
+    // ------------------------------------
 
     const submitBtn = document.getElementById('submitBtn');
     const successMessage = document.getElementById('successMessage');
@@ -589,16 +604,16 @@ function sendToTelegram(event) {
                 mode: 'no-cors',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ 
-    "name": name, 
-    "phone": phone, 
-    "variant": qty,
-    "total": (function(q) {
-        if (q.includes('1 шт')) return 299;
-        if (q.includes('1+1=3')) return 598;
-        if (q.includes('2+2=6')) return 1196;
-        return 0;
-    })(qty)
-})
+                    "name": name, 
+                    "phone": phone, 
+                    "variant": qty,
+                    "total": (function(q) {
+                        if (q.includes('1 шт')) return 299;
+                        if (q.includes('1+1=3')) return 598;
+                        if (q.includes('2+2=6')) return 1196;
+                        return 0;
+                    })(qty)
+                })
             });
 
             form.style.display = 'none';
