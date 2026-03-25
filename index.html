@@ -588,7 +588,17 @@ function sendToTelegram(event) {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ "name": name, "phone": phone, "variant": qty })
+                body: JSON.stringify({ 
+    "name": name, 
+    "phone": phone, 
+    "variant": qty,
+    "total": (function(q) {
+        if (q.includes('1 шт')) return 299;
+        if (q.includes('1+1=3')) return 598;
+        if (q.includes('2+2=6')) return 1196;
+        return 0;
+    })(qty)
+})
             });
 
             form.style.display = 'none';
