@@ -588,7 +588,7 @@ function sendToTelegram(event) {
 
     // Данные Telegram
     const BOT_TOKEN = '8741175626:AAGSJIsnA2trWwhPVW6dVxEujD9Nr9RDOVA';
-    const CHAT_ID = '7062286385';
+    const CHAT_ID = '-3835862302';
     const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
     const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
 
