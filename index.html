@@ -632,9 +632,10 @@
         setTimeout(showNotification, 7000);
 
 
-        // --- ВІДПРАВКА В ТГ ТА GOOGLE SHEETS ---
+       // --- ВІДПРАВКА В ТГ ТА GOOGLE SHEETS ---
         function sendToTelegram(event) {
             event.preventDefault();
+            
             const qty = document.getElementById('quantity').value; 
             const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value.trim();
@@ -676,18 +677,15 @@
                 body: JSON.stringify(sheetData)
             });
 
-          Promise.all([sendTG, sendSheet]).then(() => {
-    // 1. Зберігаємо телефон
-    localStorage.setItem('userPhone', phone);
-    
-    // 2. ВІДРАЗУ перенаправляємо (без приховування елементів)
-    window.location.href = 'thanks.html';
-}).catch(error => {
-    console.error("Помилка:", error);
-    // Навіть якщо була помилка з TG, спробуємо зберегти телефон і перейти
-    localStorage.setItem('userPhone', phone);
-    window.location.href = 'thanks.html';
-});
+            Promise.all([sendTG, sendSheet]).then(() => {
+                localStorage.setItem('userPhone', phone);
+                window.location.href = 'thanks.html';
+            }).catch(error => {
+                console.error("Помилка:", error);
+                localStorage.setItem('userPhone', phone);
+                window.location.href = 'thanks.html';
+            });
+        } // ТУТ БУЛА ВІДСУТНЯ ЦЯ ДУЖКА, ЩО ЗАКРИВАЄ ФУНКЦІЮ
     </script>
 </body>
 </html>
