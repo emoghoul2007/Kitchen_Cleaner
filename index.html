@@ -662,7 +662,7 @@ function sendToTelegram(event) {
     const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
 
     // Дані для Google Sheets
-    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbwtZuBn_h-_MfffY2AQTQqQH4GDkrQzAtA4igy-m6MlXDeIZZnU2EszKDxQnxLk-i8bTA/exec';
+    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzNisWpmPv5Oqb8ZxgRiD696P8ekPzd47nN9PsQp11nQthoddxqnO2a8ksOicmMymnJyg/exec';
     const sheetData = {
         "name": name,
         "phone": phone,
