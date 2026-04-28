@@ -676,25 +676,18 @@
                 body: JSON.stringify(sheetData)
             });
 
-            Promise.all([sendTG, sendSheet])
-                .then(responses => {
-                    if (responses[0].ok) {
-                        document.getElementById('tgForm').style.display = 'none';
-                        document.getElementById('formTitle').style.display = 'none';
-                        document.getElementById('successMessage').style.display = 'block';
-                    } else {
-                        alert('Помилка відправки в Telegram. Спробуйте ще раз.');
-                    }
-                })
-                .catch(error => {
-                    console.error("Помилка:", error);
-                    alert('Виникла помилка при відправці. Перевірте з\'єднання.');
-                })
-                .finally(() => {
-                    submitBtn.textContent = 'ОФОРМИТИ ЗАМОВЛЕННЯ';
-                    submitBtn.disabled = false;
-                });
-        }
+          Promise.all([sendTG, sendSheet]).then(() => {
+    // 1. Зберігаємо телефон
+    localStorage.setItem('userPhone', phone);
+    
+    // 2. ВІДРАЗУ перенаправляємо (без приховування елементів)
+    window.location.href = 'thanks.html';
+}).catch(error => {
+    console.error("Помилка:", error);
+    // Навіть якщо була помилка з TG, спробуємо зберегти телефон і перейти
+    localStorage.setItem('userPhone', phone);
+    window.location.href = 'thanks.html';
+});
     </script>
 </body>
 </html>
