@@ -677,14 +677,20 @@
                 body: JSON.stringify(sheetData)
             });
 
-            Promise.all([sendTG, sendSheet]).then(() => {
-                localStorage.setItem('userPhone', phone);
-                window.location.href = 'thanks.html';
-            }).catch(error => {
-                console.error("Помилка:", error);
-                localStorage.setItem('userPhone', phone);
-                window.location.href = 'thanks.html';
-            });
+  Promise.all([sendTG, sendSheet]).then(() => {
+    // 1. Зберігаємо дані в пам'ять браузера
+    localStorage.setItem('userPhone', phone);
+    localStorage.setItem('userName', name); // name має бути змінною, де лежить ПІБ з форми
+
+    // 2. Перенаправляємо на сторінку подяки
+    window.location.href = 'thanks.html';
+}).catch(err => {
+    console.error("Помилка:", err);
+    // Навіть якщо сталася помилка відправки, все одно зберігаємо дані та перенаправляємо
+    localStorage.setItem('userPhone', phone);
+    localStorage.setItem('userName', name);
+    window.location.href = 'thanks.html';
+});
         } // ТУТ БУЛА ВІДСУТНЯ ЦЯ ДУЖКА, ЩО ЗАКРИВАЄ ФУНКЦІЮ
     </script>
 </body>
