@@ -295,14 +295,16 @@
 </div>
 
 <script>
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMV3m7QBSj9tFFMUmdjKEXWfUq0hlv1C-hbPfE8J9CTEC_ilrbw0o6JXb2Wuitg1FDzQ/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbypsx1urzavErgzjhzXv_LGcAaw6H4ezW0tzA7RJuRGG_lF-4qV0Ful3XiAMl8XYfQRpQ/exec';
 
     document.querySelectorAll('.btn-add').forEach(button => {
         button.addEventListener('click', function() {
+            // Дістаємо дані, які ми зберегли на першій сторінці
             const userPhone = localStorage.getItem('userPhone');
+            const userName = localStorage.getItem('userName') || "Клієнт (апсел)"; 
             
-            if (!userPhone || userPhone === 'undefined') {
-                alert('Помилка: номер телефону не знайдено. Будь ласка, оформіть замовлення спочатку.');
+            if (!userPhone) {
+                alert('Помилка: дані замовлення не знайдені.');
                 return;
             }
 
@@ -312,30 +314,25 @@
             this.innerText = 'Додається...';
             this.disabled = true;
 
-            // Використовуємо звичайну форму для надійності
             const formData = new URLSearchParams();
-            formData.append('action', 'upsell');
             formData.append('phone', userPhone);
+            formData.append('name', userName);
             formData.append('product', productName);
             formData.append('price', productPrice);
 
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors', 
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formData.toString()
             })
             .then(() => {
-                // Оскільки no-cors не дає прочитати відповідь, просто чекаємо 1 сек і міняємо кнопку
                 setTimeout(() => {
                     this.innerText = '✅ Додано до замовлення';
                     this.style.background = '#006400';
-                }, 1000);
+                }, 500);
             })
             .catch(error => {
-                console.error("Error:", error);
                 this.innerText = 'Помилка. Спробуйте ще';
                 this.disabled = false;
             });
