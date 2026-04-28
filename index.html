@@ -632,66 +632,73 @@
         setTimeout(showNotification, 7000);
 
 
-       // --- ВІДПРАВКА В ТГ ТА GOOGLE SHEETS ---
-        function sendToTelegram(event) {
-            event.preventDefault();
-            
-            const qty = document.getElementById('quantity').value; 
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
+// --- ВІДПРАВКА В ТГ ТА GOOGLE SHEETS ---
+function sendToTelegram(event) {
+    event.preventDefault();
+    
+    // Отримуємо значення з полів
+    const qty = document.getElementById('quantity').value; 
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
 
-            if (name.length < 2 || /^[\.\d]+$/.test(name)) {
-                alert("❌ Будь ласка, введіть справжнє ім'я."); return;
-            }
-            const phoneDigits = phone.replace(/\D/g, '');
-            if (phoneDigits.length < 9) {
-                alert("❌ Будь ласка, введіть коректний номер телефону."); return;
-            }
+    // Валідація
+    if (name.length < 2 || /^[\.\d]+$/.test(name)) {
+        alert("❌ Будь ласка, введіть справжнє ім'я."); return;
+    }
+    const phoneDigits = phone.replace(/\D/g, '');
+    if (phoneDigits.length < 9) {
+        alert("❌ Будь ласка, введіть коректний номер телефону."); return;
+    }
 
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.textContent = 'ВІДПРАВКА...';
-            submitBtn.disabled = true;
+    // Змінюємо стан кнопки
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.textContent = 'ВІДПРАВКА...';
+    submitBtn.disabled = true;
 
-            const BOT_TOKEN = '8741175626:AAHlZneEOfIbidnmdGE_z_u6Z834wwwTTYo';
-            const CHAT_ID = '-1003835862302';
-            const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
-            const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
+    // Дані для Telegram
+    const BOT_TOKEN = '8741175626:AAHlZneEOfIbidnmdGE_z_u6Z834wwwTTYo';
+    const CHAT_ID = '-1003835862302';
+    const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
+    const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
 
-            const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbypsx1urzavErgzjhzXv_LGcAaw6H4ezW0tzA7RJuRGG_lF-4qV0Ful3XiAMl8XYfQRpQ/exec';
-            const sheetData = {
-                "name": name,
-                "phone": phone,
-                "variant": qty,
-                "total": (function(q) {
-                    if (q.includes('1 шт')) return 449;
-                    if (q.includes('2 шт')) return 898;
-                    return 0;
-                })(qty)
-            };
+    // Дані для Google Sheets
+    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbwtZuBn_h-_MfffY2AQTQqQH4GDkrQzAtA4igy-m6MlXDeIZZnU2EszKDxQnxLk-i8bTA/exec';
+    const sheetData = {
+        "name": name,
+        "phone": phone,
+        "variant": qty,
+        "total": (function(q) {
+            if (q.includes('1 шт')) return 449;
+            if (q.includes('2 шт')) return 898;
+            return 598; // Ціна за замовчуванням (акційна)
+        })(qty)
+    };
 
-            const sendTG = fetch(tgUrl);
-            const sendSheet = fetch(googleSheetUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(sheetData)
-            });
+    // Підготовка запитів
+    const sendTG = fetch(tgUrl);
+    const sendSheet = fetch(googleSheetUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(sheetData)
+    });
 
-  Promise.all([sendTG, sendSheet]).then(() => {
-    // 1. Зберігаємо дані в пам'ять браузера
-    localStorage.setItem('userPhone', phone);
-    localStorage.setItem('userName', name); // name має бути змінною, де лежить ПІБ з форми
+    // --- ОСЬ ЦЕЙ БЛОК ЯКИЙ ТИ ПИТАВ ---
+    Promise.all([sendTG, sendSheet]).then(() => {
+        // 1. Зберігаємо дані в пам'ять браузера ПЕРЕД переходом
+        localStorage.setItem('userPhone', phone);
+        localStorage.setItem('userName', name);
 
-    // 2. Перенаправляємо на сторінку подяки
-    window.location.href = 'thanks.html';
-}).catch(err => {
-    console.error("Помилка:", err);
-    // Навіть якщо сталася помилка відправки, все одно зберігаємо дані та перенаправляємо
-    localStorage.setItem('userPhone', phone);
-    localStorage.setItem('userName', name);
-    window.location.href = 'thanks.html';
-});
-        } // ТУТ БУЛА ВІДСУТНЯ ЦЯ ДУЖКА, ЩО ЗАКРИВАЄ ФУНКЦІЮ
+        // 2. Перенаправляємо на сторінку подяки
+        window.location.href = 'thanks.html';
+    }).catch(err => {
+        console.error("Помилка:", err);
+        // Навіть якщо Telegram «впав», все одно зберігаємо дані і пускаємо клієнта далі
+        localStorage.setItem('userPhone', phone);
+        localStorage.setItem('userName', name);
+        window.location.href = 'thanks.html';
+    });
+} // Кінець функції sendToTelegram
     </script>
 </body>
 </html>
