@@ -296,7 +296,7 @@
 
 <script>
     // ВСТАВ СЮДИ СВОЄ ПОСИЛАННЯ НА GOOGLE SCRIPT
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFdvMBUE-zwCXaZ38CrQAc4DlxPBs000_ZixvDfLNvSlLm-zGWuZZ-GQDBJn2YSutJuQ/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQ7iJiMx7krwIYafVS-vjveAfmwtVBtLoYmrrtGp5MXT5ZNS4SS7I2_TiYFXiHUQs8KQ/exec';
 
     document.querySelectorAll('.btn-add').forEach(button => {
         button.addEventListener('click', function() {
@@ -316,26 +316,32 @@
             this.disabled = true;
 
             // Відправляємо дані в таблицю
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify({
-                    action: 'upsell',
-                    phone: userPhone,
-                    product: productName,
-                    price: productPrice
-                })
-            })
-            .then(response => response.text())
-            .then(data => {
-                this.innerText = '✅ Додано до замовлення';
-                this.style.background = '#006400'; // Зелений колір при успіху
-            })
-            .catch(error => {
-                this.innerText = 'Помилка. Спробуйте ще';
-                this.disabled = false;
-            });
-        });
-    });
+// Відправляємо дані в таблицю
+fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors', // Додаємо цей рядок
+    cache: 'no-cache',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        action: 'upsell',
+        phone: userPhone,
+        product: productName,
+        price: productPrice
+    })
+})
+.then(() => {
+    // Оскільки використовується no-cors, ми не отримаємо тексту відповіді,
+    // тому просто вважаємо, що все ок через 500мс
+    this.innerText = '✅ Додано до замовлення';
+    this.style.background = '#006400';
+})
+.catch(error => {
+    console.error("Помилка:", error);
+    this.innerText = 'Помилка. Спробуйте ще';
+    this.disabled = false;
+});
 </script>
 
 </body>
