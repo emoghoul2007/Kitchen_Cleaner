@@ -657,7 +657,7 @@
             const textMessage = `🔥 НОВЕ ЗАМОВЛЕННЯ\n\n📦 Товар: Kitchen Cleaner\n🛒 Варіант: ${qty}\n👤 ПІБ: ${name}\n📞 Телефон: ${phone}`;
             const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
 
-            const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbxFdvMBUE-zwCXaZ38CrQAc4DlxPBs000_ZixvDfLNvSlLm-zGWuZZ-GQDBJn2YSutJuQ/exec';
+            const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbwQ7iJiMx7krwIYafVS-vjveAfmwtVBtLoYmrrtGp5MXT5ZNS4SS7I2_TiYFXiHUQs8KQ/exec';
             const sheetData = {
                 "name": name,
                 "phone": phone,
