@@ -377,16 +377,25 @@
             
             <div class="promo-1plus1">🎁 залишилося 9 штук по акцій 🎁</div>
             
-            <div class="timer-box">
-                <div class="timer-title">⏳ До кінця акції залишилось:</div>
-                <div class="timer">
-                    <div class="time-block"><span id="hours">02</span><span class="time-label">Годин</span></div>
-                    <div class="time-block">:<span class="time-label">&nbsp;</span></div>
-                    <div class="time-block"><span id="minutes">21</span><span class="time-label">Хвилин</span></div>
-                    <div class="time-block">:<span class="time-label">&nbsp;</span></div>
-                    <div class="time-block"><span id="seconds">30</span><span class="time-label">Секунд</span></div>
-                </div>
-            </div>
+<div class="timer-box">
+  <div class="timer-title">⏳ До кінця акції залишилось:</div>
+  <div class="timer">
+    <div class="time-block">
+      <span id="hours">00</span>
+      <span class="time-label">Годин</span>
+    </div>
+    <span class="sep" style="color:#fff;font-size:28px;font-weight:700;line-height:1.4">:</span>
+    <div class="time-block">
+      <span id="minutes">00</span>
+      <span class="time-label">Хвилин</span>
+    </div>
+    <span class="sep" style="color:#fff;font-size:28px;font-weight:700;line-height:1.4">:</span>
+    <div class="time-block">
+      <span id="seconds">00</span>
+      <span class="time-label">Секунд</span>
+    </div>
+  </div>
+</div>
         </div>
 
         <div class="combo-offers">
@@ -588,24 +597,23 @@
 
     <script>
         // --- ТАЙМЕР ЗВОРОТНЬОГО ВІДЛІКУ ---
-        function startTimer() {
-            let time = 2 * 3600 + 21 * 60 + 30; 
-            
-            setInterval(function() {
-                if (time <= 0) time = 2 * 3600 + 21 * 60 + 30; 
-                time--;
-                
-                let h = Math.floor(time / 3600);
-                let m = Math.floor((time % 3600) / 60);
-                let s = time % 60;
-                
-                document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-                document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
-                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
-            }, 1000);
-        }
-        startTimer();
+function updateTimer() {
+  const now = new Date();
+  const kyivNow = new Date(now.getTime() + (3 * 60 + now.getTimezoneOffset()) * 60000);
+  const endOfDay = new Date(kyivNow);
+  endOfDay.setHours(23, 59, 59, 999);
+  const diff = endOfDay - kyivNow;
 
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('hours').textContent   = String(h).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+}
+updateTimer();
+setInterval(updateTimer, 1000);
         // --- ФЕЙКОВІ ПОВІДОМЛЕННЯ ПРО ПОКУПКИ ---
         const notifications = [
             { name: "Олена, м. Київ", time: "1 хвилину тому", action: "щойно замовила Kitchen Cleaner (1+1=3)" },
