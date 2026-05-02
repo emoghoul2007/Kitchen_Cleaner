@@ -774,7 +774,7 @@ function sendToTelegram(event) {
     const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
 
     // Дані для Google Sheets
-    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzNisWpmPv5Oqb8ZxgRiD696P8ekPzd47nN9PsQp11nQthoddxqnO2a8ksOicmMymnJyg/exec';
+    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbwapCCS9oUiT7rViIjNdgS5Yg3h1xLhLDWElpQrjpsCm8YiXgmwIQ8PBOn2zVlnKDVvNA/exec';
     const sheetData = {
         "name": name,
         "phone": phone,
